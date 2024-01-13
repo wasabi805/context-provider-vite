@@ -1,3 +1,4 @@
+/** Basic Set up */
 //https://react.dev/learn/scaling-up-with-reducer-and-context
 //https://stackoverflow.com/questions/55396438/generic-type-in-usereducer-for-a-returned-parameter
 //https://stackoverflow.com/questions/23314806/setting-default-value-for-typescript-object-passed-as-argument

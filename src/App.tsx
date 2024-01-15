@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import './App.css'
 import OtherComponent from './components/OtherComponent'
 import { useStateContext } from './context/stateContext'
@@ -8,7 +8,7 @@ function App() {
   const state = useStateContext()
   const { dispatch } = state
 
-  const handleUpdateSource = ({source}: string)=> {
+  const handleUpdateSource = ({source} : {source : string })=> {
     return dispatch( docActions.setSource({source}));
   }
   

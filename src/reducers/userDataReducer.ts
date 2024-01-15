@@ -4,16 +4,21 @@
 //https://stackoverflow.com/questions/23314806/setting-default-value-for-typescript-object-passed-as-argument
 //see this for multiple reducers https://www.youtube.com/watch?v=HbVWd7qKLU4
 
-type Action<T>={
+type Action={
     type: string,
-    payload: {
+    payload : {
         id: number,
-        firstName: string,
-    }
+        firstName?: string,
+    } 
 }
 
-const userDataReducer = ( state = initialState , action)  => {
-    console.log('reducer fired!!!!!!', {action, state})
+type State ={
+    id: number,
+    firstName: string
+}
+
+
+const userDataReducer = ( state: State = initialState , action : Action)   => {
     switch (action.type) {
         case 'name':
             return{

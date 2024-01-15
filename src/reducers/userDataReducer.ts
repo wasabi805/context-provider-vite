@@ -12,16 +12,8 @@ type Action<T>={
     }
 }
 
-// type State<T> = {
-//     id: number
-//     firstName: string
-// }
-
-
-
-
-const userDataReducer = ( state = userInitialState , action)  => {
-    console.log('reducer fired', {action, state})
+const userDataReducer = ( state = initialState , action)  => {
+    console.log('reducer fired!!!!!!', {action, state})
     switch (action.type) {
         case 'name':
             return{
@@ -35,8 +27,7 @@ const userDataReducer = ( state = userInitialState , action)  => {
 
 export default userDataReducer
 
-export const userInitialState = {
+export const initialState = {
     id: 0,
     firstName : 'Tim'
-}
-  ;
+};

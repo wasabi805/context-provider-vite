@@ -1,0 +1,35 @@
+import React, { createContext, useCallback, useContext, useReducer } from 'react';
+
+import { initialState as docsInitialState, docsReducer } from '../reducers/docsReducer';
+import userDataReducer, { initialState as usersInitialState } from '../reducers/userDataReducer';
+
+// Create a context to hold the state
+const StateContext = createContext(null);
+
+// Create a component that will provide the context
+// IncrementProvider takes in an argument called children
+export const IncrementProvider = ({ children }) => {
+    
+    const [ docsState,  setDocsState ] = useReducer(docsReducer, docsInitialState);
+    const [ userState, setUserState ] = useReducer(userDataReducer, usersInitialState);  
+
+    /**See for combinedState && combineDispatch :  https://stackoverflow.com/questions/59200785/react-usereducer-how-to-combine-multiple-reducers/61439698#61439698 */
+    const combinedState = React.useMemo(() => ({ docsState, userState, }), [docsState, userState]);
+    const combineDispatch = (...dispatches) => (action) =>
+        dispatches.forEach((dispatch) => dispatch(action));
+
+    const dispatch = useCallback(combineDispatch(setDocsState, setUserState), [setDocsState, setUserState]);
+    
+// In this return value, we passed-in children as the CONSUMER of the PROVIDER
+// This will able children components to access the data inside the context
+  return (
+    <StateContext.Provider value={{ ...combinedState, dispatch }}>
+      {children}
+    </StateContext.Provider>
+  );
+}
+
+// Create a function that invokes the context 
+export const useStateContext = () => {
+  return useContext(StateContext)
+}

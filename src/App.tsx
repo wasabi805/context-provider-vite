@@ -1,35 +1,32 @@
-import { useReducer } from 'react'
-import { UserDispatchContext, UserContext } from './context'
-
-import * as usersActions from './actions/users'
-import userDataReducer from './reducers/userDataReducer'
-import { userInitialState } from './reducers/userDataReducer'
+import React, {useContext} from 'react'
 import './App.css'
-
-console.log('on mount', userInitialState)
+import OtherComponent from './components/OtherComponent'
+import { useStateContext } from './context/stateContext'
+import * as docActions from './actions/docsActions'
 
 function App() {  
-  const [users, dispatch] = useReducer( userDataReducer, userInitialState)
-  console.log('the stuff', {
-    users, dispatch
-  })
-  const {changeName} = usersActions
+  const state = useStateContext()
+  const { dispatch } = state
 
-  const handleAddTask = ({firstName}: string)=> {
-
-    return dispatch( changeName({ firstName }) );
+  const handleUpdateSource = ({source}: string)=> {
+    return dispatch( docActions.setSource({source}));
   }
+  
+
+  console.log('what is testMe', state)
+
   return (
-    
-      <UserContext.Provider value={users}>
-        <UserDispatchContext.Provider value={dispatch}>
+
+        <div>
           <div>
-            <button onClick={()=> handleAddTask({firstName:'Ocampo!'})}>Add Name</button>
+            in state:
+            {state.docsState.source}
           </div>
-          {users.firstName}
-        </UserDispatchContext.Provider>
-      </UserContext.Provider>
-    
+
+          <button onClick={ ()=> handleUpdateSource({source:'PUBLIC'})}>Update Source : APP</button>
+            <OtherComponent/>
+        </div>
+      
   )
 }
 

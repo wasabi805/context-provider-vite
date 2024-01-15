@@ -13,7 +13,6 @@ type Action = {
 }
 
 export type StateContextType ={
-
   dispatch: ()=> void,
 
   userState:{

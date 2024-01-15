@@ -66,5 +66,5 @@ export const StateProvider : FC <Props>  = ({ children }) => {
 
 // Create a function that invokes the context 
 export const useStateContext = () => {
-  return useContext<StateContextType | null >(StateContext)
+  return useContext<StateContextType >(StateContext)
 }
